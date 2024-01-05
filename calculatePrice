@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+float calculatePrice(char product_id[11], float base_price, char person_id[11], int day) {
+    // Kontrollera om det är en tisdag (dag = 2)
+    int is_tuesday = (day == 2);
+
+    // Kontrollera om personen är över 50 år
+    int is_over_50 = atoi(person_id) < 5000000000;  // Antag att personnumret innehåller födelsedatum
+
+    // Kontrollera om det är lördag eller söndag och produkten börjar med "1" eller "2"
+    int is_weekend_discount = (day == 6 || day == 7) && (product_id[0] == '1' || product_id[0] == '2');
+
+    // Beräkna rabatten baserat på villkoren
+    float discount = 0.0;
+    if (is_tuesday) {
+        discount += 0.05;
+    }
+    if (is_over_50) {
+        discount += 0.01;
+    }
+    if (is_weekend_discount) {
+        discount += 20.0;
+    }
+
+    // Beräkna det justerade priset
+    float adjusted_price = base_price - (base_price * discount);
+
+    return adjusted_price;
+}
+
+int main() {
+    // Exempel på användning:
+    char product_id[] = "1234567890";
+    float base_price = 100.0;
+    char person_id[] = "6512311234";
+    int day = 2;
+
+    float result_price = calculatePrice(product_id, base_price, person_id, day);
+    printf("Det justerade priset är: %.2f\n", result_price);
+
+    return 0;
+}
