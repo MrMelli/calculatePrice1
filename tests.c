@@ -14,11 +14,10 @@ START_TEST(test_calculatePrice) {
     // Testa för över 50 år (förväntad rabatt: 1%)
     ck_assert_float_eq_tol(calculatePrice(product_id, base_price, "7001011234", 2), 99.0, 0.001);
 
-    // Lägg till fler tester efter behov
+   
 }
 END_TEST
 
-// Övriga tester här...
 
 int main(void) {
     Suite *s1 = suite_create("Price Calculator");
